@@ -1,0 +1,34 @@
+{
+  "public_storage": {
+    "nist": [{"id": "AC-3", "effectiveness": 0.6}, {"id": "SC-7", "effectiveness": 0.5}],
+    "cis": [{"id": "2.1.5", "effectiveness": 0.7}]
+  },
+  "excessive_permissions": {
+    "nist": [{"id": "AC-6", "effectiveness": 0.6}, {"id": "AC-3", "effectiveness": 0.4}],
+    "cis": [{"id": "1.16", "effectiveness": 0.5}]
+  },
+  "network_exposure": {
+    "nist": [{"id": "SC-7", "effectiveness": 0.6}, {"id": "CM-7", "effectiveness": 0.4}],
+    "cis": [{"id": "4.1", "effectiveness": 0.6}, {"id": "4.3", "effectiveness": 0.3}]
+  },
+  "unencrypted_data": {
+    "nist": [{"id": "SC-28", "effectiveness": 0.7}, {"id": "SC-13", "effectiveness": 0.5}],
+    "cis": [{"id": "2.1.1", "effectiveness": 0.6}, {"id": "2.2.1", "effectiveness": 0.6}]
+  },
+  "logging_disabled": {
+    "nist": [{"id": "AU-2", "effectiveness": 0.5}, {"id": "AU-12", "effectiveness": 0.5}],
+    "cis": [{"id": "3.1", "effectiveness": 0.6}]
+  },
+  "mfa_disabled": {
+    "nist": [{"id": "IA-2", "effectiveness": 0.7}, {"id": "IA-5", "effectiveness": 0.4}],
+    "cis": [{"id": "1.5", "effectiveness": 0.7}]
+  },
+  "soc_alert": {
+    "nist": [{"id": "SI-4", "effectiveness": 0.5}, {"id": "AU-12", "effectiveness": 0.3}],
+    "cis": []
+  },
+  "default": {
+    "nist": [{"id": "SI-4", "effectiveness": 0.3}],
+    "cis": []
+  }
+}

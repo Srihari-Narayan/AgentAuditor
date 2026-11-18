@@ -1,0 +1,31 @@
+# Default: `docker compose up analyst` runs the demo offline (mock model).
+#
+# To use a real self-hosted model, start the `vllm` service (needs a GPU host)
+# with:  docker compose --profile model up
+# then point the analyst at it via MODEL_BASE_URL (see .env.example).
+
+services:
+  analyst:
+    build: .
+    environment:
+      - MODEL_BASE_URL=${MODEL_BASE_URL:-}
+      - MODEL_NAME=${MODEL_NAME:-Qwen2.5-7B-Instruct}
+    volumes:
+      - ./reports:/app/reports
+    command: ["python", "-m", "audit_agent.run", "--demo"]
+
+  # Optional self-hosted model endpoint. Requires an NVIDIA GPU + the container
+  # toolkit. Commented runtime bits so the file is valid on a CPU-only machine.
+  vllm:
+    profiles: ["model"]
+    image: vllm/vllm-openai:latest
+    command: ["--model", "Qwen/Qwen2.5-7B-Instruct", "--port", "8000"]
+    ports:
+      - "8000:8000"
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]

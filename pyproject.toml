@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agentauditor"
+version = "0.1.0"
+description = "AgentAuditor: auditable agentic SOC/compliance analyst with a prompt-injection self-defense layer"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Srihari N Narayan" }]
+dependencies = []  # runtime is pure standard library by design (offline, reproducible)
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4"]
+
+[project.scripts]
+audit-agent = "audit_agent.run:main"
+
+[tool.setuptools]
+packages = ["audit_agent"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

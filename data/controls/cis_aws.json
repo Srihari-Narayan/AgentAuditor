@@ -1,0 +1,10 @@
+{
+  "1.5": "Ensure MFA is enabled for the root user account",
+  "1.16": "Ensure IAM policies are attached only to groups or roles",
+  "2.1.1": "Ensure S3 bucket server-side encryption is enabled",
+  "2.1.5": "Ensure S3 Block Public Access is enabled at the bucket level",
+  "2.2.1": "Ensure EBS volume encryption is enabled",
+  "3.1": "Ensure CloudTrail is enabled in all regions",
+  "4.1": "Ensure no security groups allow ingress from 0.0.0.0/0 to admin ports",
+  "4.3": "Ensure the default security group restricts all traffic"
+}

@@ -1,0 +1,13 @@
+{
+  "AC-3": "Access Enforcement",
+  "AC-6": "Least Privilege",
+  "AU-2": "Event Logging",
+  "AU-12": "Audit Record Generation",
+  "CM-7": "Least Functionality",
+  "IA-2": "Identification and Authentication (Organizational Users)",
+  "IA-5": "Authenticator Management",
+  "SC-7": "Boundary Protection",
+  "SC-13": "Cryptographic Protection",
+  "SC-28": "Protection of Information at Rest",
+  "SI-4": "System Monitoring"
+}
