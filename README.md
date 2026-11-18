@@ -1,8 +1,8 @@
-# AgentAuditor — Auditable Agentic Risk & Compliance Analyst
+# AgentAuditor: Auditable Agentic Risk & Compliance Analyst
 
 An agentic SOC/compliance analyst that ingests cloud-posture and SOC findings,
 maps each to **NIST 800-53** and **CIS AWS** controls, quantifies **residual
-risk**, and emits an **auditable** governance report — wrapped in a
+risk**, and emits an **auditable** governance report, wrapped in a
 **self-defense layer** that resists indirect prompt injection (OWASP Agentic
 Top 10: *ASI01 Agent Goal Hijack*, *ASI02 Tool Misuse*).
 
@@ -10,7 +10,7 @@ It is built around one opinion: **in a compliance setting the LLM must not be
 the source of truth.** Control mapping and risk math are deterministic and
 recomputable by hand; the model only writes the human-readable justification;
 humans approve sensitive actions. That is what makes every line of the output
-answer the question a compliance team actually asks — *"why did the system say
+answer the question a compliance team actually asks: *"why did the system say
 that?"*
 
 > ⚠️ Research / portfolio project. See [DISCLAIMER.md](DISCLAIMER.md). Everything
@@ -27,7 +27,7 @@ Three properties are the whole point, and each maps to a real governance need:
 |---|---|---|
 | **Auditable** | every decision is a structured, replayable record (control, evidence, risk math, confidence, guardrail events, justification) | compliance lives on "show me why" |
 | **Deterministic ground truth** | control mapping (`controls.py`) and residual-risk scoring (`risk.py`) are rule-based and reproducible; the LLM never picks a control or a number | a hallucinating or *compromised* model cannot corrupt the compliance result |
-| **Self-defending** | a guardrail layer quarantines untrusted text, enforces least-privilege tools, and gates sensitive actions behind a human | the agent itself is an attack surface — most demos ignore this |
+| **Self-defending** | a guardrail layer quarantines untrusted text, enforces least-privilege tools, and gates sensitive actions behind a human | the agent itself is an attack surface; most demos ignore this |
 
 ## Architecture
 
@@ -36,7 +36,7 @@ Three properties are the whole point, and each maps to a real governance need:
         │
         ▼
  ┌──────────────────────────────────────────────────────────────┐
- │  AuditAnalyst  (audit_agent/agent.py) — thin tool-calling loop │
+ │  AuditAnalyst  (audit_agent/agent.py) - thin tool-calling loop │
  │                                                                │
  │   sanitize ──▶ map_control ──▶ score_risk ──▶ decide ──▶ gate   │
  │   (guardrails) (deterministic) (deterministic)       (HITL)     │
@@ -53,7 +53,7 @@ Three properties are the whole point, and each maps to a real governance need:
 
 The LLM (`audit_agent/llm.py`) runs against a **self-hosted, OpenAI-compatible
 endpoint** (vLLM serving Qwen/Llama) so no finding data leaves your trust
-boundary — a deliberate data-residency property. With no endpoint configured it
+boundary, a deliberate data-residency property. With no endpoint configured it
 falls back to a deterministic offline mock, so the whole project runs in CI with
 zero GPU and zero network.
 
@@ -98,7 +98,7 @@ Ingested 8 findings -> 8 reported, 6 escalated, 6 awaiting approval.
 Injection attempts: 1 | acted on: 0
 ```
 
-The injected note is detected, quarantined, and reported — **but not acted on**.
+The injected note is detected, quarantined, and reported, **but not acted on**.
 Every decision lands in `reports/report.md` with its control mapping, inherent→
 residual risk, and justification, and in `reports/audit_trail.jsonl` as a
 replayable record.
@@ -144,7 +144,7 @@ output. [terraform/](terraform/) stands up a deliberately-misconfigured sandbox
 account and points [Prowler](https://github.com/prowler-cloud/prowler) at it;
 its JSON becomes the agent's input. Structured audit logs are shaped to ship
 into a SIEM (e.g. Microsoft Sentinel) for the defender's view. Run the sandbox
-**only in a throwaway account you own** — never against production.
+**only in a throwaway account you own**, never against production.
 
 ## Roadmap
 
@@ -152,7 +152,3 @@ into a SIEM (e.g. Microsoft Sentinel) for the defender's view. Run the sandbox
 - RAG over the full NIST 800-53 catalog for control selection with citations.
 - A second reviewer agent that red-teams this agent's decisions continuously.
 - Sentinel workbook for the audit trail.
-
-## License
-
-MIT © Srihari N Narayan. See [LICENSE](LICENSE).
