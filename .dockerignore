@@ -1,0 +1,33 @@
+# Keep the build context (and image) small and clean.
+.git
+.github
+.gitignore
+.dockerignore
+
+# Python caches / build artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# Generated artifacts (regenerated inside the container)
+reports/*.md
+reports/*.json
+reports/*.jsonl
+
+# Secrets / local env
+.env
+
+# Terraform state (never needed in the image)
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.*
+terraform/.terraform.lock.hcl
+
+# Editor / OS
+.idea/
+.vscode/
+.DS_Store

@@ -1,7 +1,7 @@
 FROM python:3.12-slim
 
 WORKDIR /app
-COPY pyproject.toml README.md LICENSE ./
+COPY pyproject.toml README.md ./
 COPY audit_agent ./audit_agent
 COPY data ./data
 COPY defense ./defense

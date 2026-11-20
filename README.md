@@ -88,6 +88,33 @@ export MODEL_NAME=Qwen2.5-7B-Instruct
 python -m audit_agent.run --demo
 ```
 
+## Run with Docker
+
+The whole thing runs in a container with zero local setup (offline mock model,
+guardrails on). Reports are written back to `./reports` on the host via a mounted
+volume:
+
+```bash
+docker compose up analyst
+```
+
+Or build and run the image directly:
+
+```bash
+docker build -t agentauditor .
+docker run --rm -v "$PWD/reports:/app/reports" agentauditor
+```
+
+Run a custom findings file, the vulnerable baseline, or the red-team harness
+instead of the default demo:
+
+```bash
+docker compose run --rm analyst \
+  python -m audit_agent.run --findings data/findings/sample_findings.json --no-guardrails
+
+docker compose run --rm analyst python defense/redteam/run_redteam.py
+```
+
 ## What the demo shows
 
 Ingesting 8 sample findings (one of which hides a prompt-injection payload in an
