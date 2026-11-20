@@ -14,6 +14,20 @@ services:
       - ./reports:/app/reports
     command: ["python", "-m", "audit_agent.run", "--demo"]
 
+  # Optional web GUI. Opt-in, so the default `docker compose up` stays the CLI.
+  #   docker compose --profile gui up gui   ->  http://localhost:8000
+  gui:
+    build: .
+    profiles: ["gui"]
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+      - MODEL_BASE_URL=${MODEL_BASE_URL:-}
+      - MODEL_NAME=${MODEL_NAME:-Qwen2.5-7B-Instruct}
+    ports:
+      - "8000:8000"
+    command: ["python", "-m", "audit_agent.web"]
+
   # Optional self-hosted model endpoint. Requires an NVIDIA GPU + the container
   # toolkit. Commented runtime bits so the file is valid on a CPU-only machine.
   vllm:

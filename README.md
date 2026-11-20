@@ -115,6 +115,25 @@ docker compose run --rm analyst \
 docker compose run --rm analyst python defense/redteam/run_redteam.py
 ```
 
+## Optional web GUI
+
+The CLI is the primary interface, but an optional browser GUI is bundled for a
+point-and-click view: paste a findings JSON, toggle guardrails on/off, and see
+the governance report rendered live. It is standard-library only (no new
+dependencies) and runs the exact same deterministic pipeline as the CLI.
+
+```bash
+python -m audit_agent.web            # serves http://127.0.0.1:8000
+HOST=0.0.0.0 PORT=9000 python -m audit_agent.web
+```
+
+In Docker it is opt-in via a compose profile, so the default container stays the
+CLI:
+
+```bash
+docker compose --profile gui up gui  # then open http://localhost:8000
+```
+
 ## What the demo shows
 
 Ingesting 8 sample findings (one of which hides a prompt-injection payload in an
